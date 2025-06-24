@@ -3,6 +3,38 @@ let previousValue = null;
 let operation = null;
 let resetDisplay = false;
 
+const buttons = document.querySelectorAll('.btn');
+const display = document.querySelector('#display');
+const controls = document.querySelectorAll('.control');
+
+buttons.forEach(button => {
+    const value = button.textContent;
+
+    button.addEventListener('click', () => {
+        if(button.classList.contains('numeric-btn')) {
+            numberHandle(value);
+        } else if(button.classList.contains('operator-btn')) {
+            operatorHandle(value);
+        } else if(button.classList.contains('equal-btn')) {
+            equalHandle();
+        } else if(button.classList.contains('decimal-point')) {
+            decimalHandle();
+        }
+    })
+}); 
+
+controls.forEach(control => {
+    const action = control.dataset.action;
+
+    control.addEventListener('click', () => {
+        if(action === 'AC') {
+            controlHandle(action);
+        } else if(action === 'DEL') {
+            controlHandle(action);
+        }
+    })
+});
+
 const numberHandle = (num) => {
     if(currentValue === '0' || resetDisplay) {
         currentValue = num;
