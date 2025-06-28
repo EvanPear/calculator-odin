@@ -124,8 +124,8 @@ a:hover {
 
 .btn {
     margin: 3px;
-    width: clamp(60px, 8vw, 80px);
-    height: clamp(60px, 8vw, 69px);
+    width: 80px;
+    height: 69px;
     border-radius: 20%;
     font-size: 18px;
     color: rgb(199, 194, 194);
