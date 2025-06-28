@@ -2,6 +2,7 @@ let currentValue = '0';
 let previousValue = null;
 let operation = null;
 let resetDisplay = false;
+let errorCheck = false;
 
 const buttons = document.querySelectorAll('.btn');
 const display = document.querySelector('#display');
@@ -77,8 +78,10 @@ const controlHandle = (data) => {
     } else if (data === 'DEL') {
         currentValue =
             currentValue.length > 1 ? currentValue.slice(0, -1) : '0';
-        if(currentValue === '0') {
+        if(currentValue === '0' || errorCheck) {
             recentEquation.textContent = '';
+            currentValue = '0';
+            errorCheck = false;
         }    
     }
     updateDisplay();
@@ -120,6 +123,7 @@ const operate = () => {
         case '/':
             if(prev === 0 || curr === 0) {
                 result = 'error';
+                errorCheck = true;
             } else {
             result = prev / curr;
             }
