@@ -80,7 +80,20 @@ const controlHandle = (data) => {
 };
 
 const updateDisplay = () => {
-    display.textContent = currentValue;
+   let cleanDisplay = parseFloat(currentValue);
+
+   let split = currentValue.split('.');
+
+   split[0] = split[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+   display.textContent = split.join('.');
+
+   if(
+    cleanDisplay !== 0 &&
+    (cleanDisplay >= 1e11 || cleanDisplay <= 1e-9)
+   ) {
+    display.textContent = cleanDisplay.toExponential(5)
+   }
 };
 
 const operate = () => {
