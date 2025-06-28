@@ -6,6 +6,7 @@ let resetDisplay = false;
 const buttons = document.querySelectorAll('.btn');
 const display = document.querySelector('#display');
 const controls = document.querySelectorAll('.control');
+const recentEquation = document.querySelector('.recent-equation');
 
 buttons.forEach(button => {
     const value = button.textContent;
@@ -72,9 +73,13 @@ const controlHandle = (data) => {
         currentValue = '0'
         resetDisplay = false;
         operation = null;
+        recentEquation.textContent = '';
     } else if (data === 'DEL') {
         currentValue =
             currentValue.length > 1 ? currentValue.slice(0, -1) : '0';
+        if(currentValue === '0') {
+            recentEquation.textContent = '';
+        }    
     }
     updateDisplay();
 };
@@ -121,5 +126,6 @@ const operate = () => {
 
     currentValue = result.toString();
     resetDisplay = true;
+    recentEquation.textContent = `${prev} ${operation} ${curr} = ${result}`;
     updateDisplay();
 };
