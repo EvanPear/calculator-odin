@@ -95,7 +95,7 @@ const updateDisplay = () => {
 
    if(
     cleanDisplay !== 0 &&
-    (cleanDisplay >= 1e11 || cleanDisplay <= 1e-9)
+    (cleanDisplay >= 1e11 || Math.abs(cleanDisplay) <= 1e-3)
    ) {
     display.textContent = cleanDisplay.toExponential(5)
    }
@@ -118,7 +118,11 @@ const operate = () => {
             result = prev * curr;
             break;
         case '/':
+            if(prev === 0 || curr === 0) {
+                result = 'error';
+            } else {
             result = prev / curr;
+            }
             break;
         default: 
             return;              
